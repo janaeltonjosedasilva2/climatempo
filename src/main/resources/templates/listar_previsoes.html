@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Previsão do tempo</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista por Id de cidade</h1>
+			<a href="/buscarPrev/cidade/1"> São Paulo - Online</a> &#9679; 
+			<a href="/buscarPrev/cidade/2">Rio de Janeiro - Online</a> &#9679; 
+			<a href="/buscarPrev/cidade/3">Minas Gerais - Online</a>
+		</div>
+		<hr>
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista por Localização de cidade</h1>
+			<a href="/buscarPrev/localizacao/-23.5489/-46.6388">Sao Paulo</a> &#9679; 
+			<a href="/buscarPrev/localizacao/-22.9035/-43.2096">Rio de Janeiro</a> &#9679; 
+			<a href="/buscarPrev/localizacao/-19.8157/-43.9542">Minas Gerais</a>
+		</div>
+		<hr>
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista por nome de cidade</h1>
+			<a href="/buscarPrev/nome/Sao Paulo">Sao Paulo</a> &#9679; 
+			<a href="/buscarPrev/nome/Rio de Janeiro">Rio de Janeiro</a> &#9679; 
+			<a href="/buscarPrev/nome/Minas Gerais">Minas Gerais</a>
+		</div>
+		<hr>
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista por letras</h1>
+			<a href="/buscarPrev/letra/s">s</a> &#9679; 
+			<a href="/buscarPrev/letra/r">j</a> &#9679; 
+			<a href="/buscarPrev/letra/m">m</a>			
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Cidade</th>
+						<th>Latitude</th>
+						<th>Longitude</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="cidade : ${cidades}">
+						<td th:text="${cidade.nome}"></td>
+						<td th:text="${cidade.latitude}"></td>
+						<td th:text="${cidade.longitude}"></td>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Semana</th>
+									<th>Data</th>
+									<th>Mínima</th>
+									<th>Máxima</th>
+									<th>Umidade</th>
+									<th>Descrição</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="clima : ${cidade.climas}">
+									<td th:text="${clima.semana.dia}"></td>
+									<td th:text="${clima.dataHora}"></td>
+									<td th:text="${clima.tempMin}"></td>
+									<td th:text="${clima.tempMax}"></td>
+									<td th:text="${clima.umidade}"></td>
+									<td th:text="${clima.descricao}"></td>
+									<td><img src="" th:src="${clima.icone}" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
